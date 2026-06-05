@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <meta name="description" content="Mahesh Mochi - Frontend Developer" />
+  <meta name="theme-color" content="#020408" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon"
+    href="https://static.vecteezy.com/system/resources/previews/047/419/535/large_2x/portfolio-icon-outline-flat-icon-vector.jpg"
+    type="image/x-icon">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,700;0,900;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "x09z7l49j4");
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JGKMVCNS1X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-JGKMVCNS1X');
+  </script>
+</head>
+
+<body>
+
+  <!-- ════════════════════════════════════
+     CINEMATIC BOOT SEQUENCE
+════════════════════════════════════ -->
+  <div id="boot-screen">
+    <canvas id="boot-canvas"></canvas>
+    <div class="boot-ui">
+      <svg viewBox="0 0 100 100" class="boot-hex" aria-hidden="true">
+        <polygon points="50,2 93,26 93,74 50,98 7,74 7,26" fill="none" stroke="var(--cyan)" stroke-width="1.5" />
+        <polygon points="50,12 83,30 83,70 50,88 17,70 17,30" fill="none" stroke="var(--cyan)" stroke-width="0.5"
+          opacity="0.35" />
+        <text x="50" y="59" text-anchor="middle" fill="var(--cyan)" font-family="'Share Tech Mono'" font-size="22"
+          font-weight="700">R</text>
+      </svg>
+      <div class="boot-lines" id="boot-lines"></div>
+      <div class="boot-bar-wrap">
+        <div class="boot-bar">
+          <div class="boot-fill" id="boot-fill"></div>
+        </div>
+        <span class="boot-pct" id="boot-pct">0%</span>
+      </div>
+      <div class="boot-skip" id="boot-skip" role="button" tabindex="0">
+        PRESS ANY KEY TO SKIP
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div id="cur-dot" aria-hidden="true"></div>
+  <div id="cur-ring" aria-hidden="true"></div>
+
+  <!-- Scroll Progress -->
+  <div id="scroll-prog" aria-hidden="true"></div>
+
+  <!-- ════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════ -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-logo">
+      <span class="logo-bracket">[</span>MAHESH<span class="logo-bracket">]</span>
+    </div>
+    <ul class="nav-list" id="nav-list">
+
+      <li>
+        <a href="#hero" class="nav-link active" data-label="00">
+          HOME
+        </a>
+      </li>
+
+      <li>
+        <a href="#about" class="nav-link" data-label="01">
+          ABOUT ME
+        </a>
+      </li>
+
+      <li>
+        <a href="#skills" class="nav-link" data-label="02">
+          SKILLS
+        </a>
+      </li>
+
+      <li>
+        <a href="#projects" class="nav-link" data-label="03">
+          PROJECTS
+        </a>
+      </li>
+
+      <li>
+        <a href="#stats" class="nav-link" data-label="04">
+          EXPERIENCE
+        </a>
+      </li>
+
+      <li>
+        <a href="#contact" class="nav-link" data-label="05">
+          CONTACT
+        </a>
+      </li>
+
+      <li>
+        <a href="#resume" class="nav-link" data-label="05">
+          RESUME
+        </a>
+      </li>
+
+    </ul>
+    <div class="nav-right">
+      <div class="nav-status">
+        <span class="status-pulse"></span>
+        <span>ONLINE</span>
+      </div>
+      <button class="nav-burger" id="nav-burger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════
+     HERO — Canvas Background + Hologram
+════════════════════════════════════ -->
+  <section id="hero" aria-label="Introduction">
+
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+    <div class="hero-body">
+
+      <!-- LEFT: Text -->
+      <div class="hero-text">
+        <div class="hero-badge">
+          <span class="badge-blink" aria-hidden="true">▮</span>
+          B.Sc IT STUDENT · WEB DEVELOPER
+        </div>
+
+        <h2 class="hero-h1">
+          <span class="h1-line">HELLO,</span>
+          <span class="h1-line h1-name">I'M MAHESH</span>
+        </h2>
+
+        <div class="hero-role-line">
+          <span class="role-pre" aria-hidden="true">&gt;&nbsp;</span>
+          <span id="typed-output" aria-live="polite"></span><span class="typed-cur" aria-hidden="true">█</span>
+        </div>
+        <p class="hero-sub">
+          Building modern web applications with a focus on
+          <em>performance</em>, <em>clean UI</em>, and <em>great user experience</em>.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#projects" class="cta-primary mag-btn">
+            <span class="cta-inner">VIEW MISSIONS</span>
+            <div class="cta-glare" aria-hidden="true"></div>
+          </a>
+          <a href="#contact" class="cta-ghost mag-btn">INITIATE CONTACT</a>
+        </div>
+
+
+        <div class="hero-socials">
+          <a href="https://github.com/maheshmochi" target="_blank" rel="noopener noreferrer" class="hsoc"
+            title="GitHub — 0007RAM">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-label="GitHub">
+              <path
+                d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/mahesh-mochi-05357b357/?isSelfProfile=false" target="_blank"
+            rel="noopener noreferrer" class="hsoc" title="LinkedIn — Sai Ram K">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-label="LinkedIn">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+          </a>
+          <a href="https://leetcode.com/u/Maheshmochi/" target="_blank" rel="noopener noreferrer" class="hsoc"
+            title="LeetCode — 0007RAM">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" alt="LeetCode"
+              width="18" height="18" style="filter:invert(1)">
+          </a>
+          <a href="https://www.instagram.com/maheshmochi18/" target="_blank" rel="noopener noreferrer" class="hsoc"
+            title="Instagram — mr_posessive_2">
+            <svg viewBox="0 0 24 24" aria-label="Instagram">
+              <defs>
+                <linearGradient id="ig-hero" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#f09433" />
+                  <stop offset="50%" stop-color="#e6683c" />
+                  <stop offset="100%" stop-color="#dc2743" />
+                </linearGradient>
+              </defs>
+              <path fill="url(#ig-hero)"
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Holographic Portrait -->
+      <div class="hero-portrait" id="portrait-wrap" aria-hidden="true">
+        <div class="holo-ring holo-r1"></div>
+        <div class="holo-ring holo-r2"></div>
+        <div class="holo-ring holo-r3"></div>
+        <div class="holo-particles" id="holo-particles"></div>
+
+        <div class="portrait-frame" id="portrait-frame">
+          <div class="portrait-scanlines"></div>
+          <img src="mahesh.jpg" alt="Mahesh — B.Sc IT Student" class="portrait-img"
+            onerror="this.style.display='none';document.getElementById('portrait-fallback').style.display='flex'">
+          <div class="portrait-fallback" id="portrait-fallback">
+            <svg viewBox="0 0 120 140" fill="none" width="120">
+              <circle cx="60" cy="45" r="28" stroke="var(--cyan)" stroke-width="1.5" />
+              <path d="M10 140 Q10 95 60 95 Q110 95 110 140" stroke="var(--cyan)" stroke-width="1.5" fill="none" />
+            </svg>
+          </div>
+          <div class="portrait-overlay"></div>
+          <div class="portrait-glitch" id="p-glitch"></div>
+        </div>
+        <div class="holo-data">
+          <div class="hd-item"><span class="hd-k">NAME</span><span class="hd-v">MAHESH MOCHI</span></div>
+          <div class="hd-item"><span class="hd-k">ROLE</span><span class="hd-v">WEB DEV</span></div>
+          <div class="hd-item"><span class="hd-k">STATUS</span><span class="hd-v hd-green">BUILDING PROJECTS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="sh-arrow"><span></span><span></span></div>
+      <span class="sh-txt">SCROLL TO EXPLORE</span>
+    </div>
+  </section>
+
+
+  <!-- Bio cards -->
+  <div class="about-bio">
+
+    <div class="bio-card glass" data-reveal>
+      <span class="bio-card-tag">ABOUT</span>
+      <p>
+        I am <strong>Mahesh Mochi</strong>, a <strong>B.Sc. IT student</strong> at <strong>HNGU University,
+          Gujarat</strong>.
+        I am an aspiring Frontend Developer focused on building responsive and user-friendly web interfaces.
+      </p>
+    </div>
+
+    <div class="bio-card glass" data-reveal>
+      <span class="bio-card-tag">EDUCATION</span>
+      <p>
+        Currently pursuing <strong>B.Sc. Information Technology</strong> at HNGU University.
+        I am learning core concepts of programming, web development, and software fundamentals,
+        along with improving my practical skills through academic and personal projects.
+      </p>
+    </div>
+
+    <div class="bio-card glass" data-reveal>
+      <span class="bio-card-tag">OBJECTIVE</span>
+      <p>
+        I am focused on becoming a skilled Frontend Developer specializing in
+        <strong>HTML, CSS, JavaScript</strong>, and currently learning <strong>React.js</strong>.
+        My goal is to build real-world projects and grow as a professional developer step by step.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Stats -->
+  <div class="about-stats-panel">
+
+    <div class="stat-hex glass" data-reveal data-count="10">
+      <div class="sh-val">3</div>
+      <div class="sh-key">PROJECTS BUILT</div>
+    </div>
+
+    <div class="stat-hex glass" data-reveal data-count="6" data-suffix="+">
+      <div class="sh-val">6</div>
+      <div class="sh-key">TECHNOLOGIES</div>
+    </div>
+
+    <div class="stat-hex glass" data-reveal data-count="100" data-suffix="+">
+      <div class="sh-val">100</div>
+      <div class="sh-key">PROBLEMS PRACTICED</div>
+    </div>
+
+    <div class="stat-hex glass" data-reveal data-count="2">
+      <div class="sh-val">2</div>
+      <div class="sh-key">YEARS LEARNING</div>
+    </div>
+
+  </div>
+
+  </div>
+
+  </div>
+  </section>
+  <!-- ════════════════════════════════════
+     SKILLS — GALAXY + GRID
+════════════════════════════════════ -->
+  <section id="skills" class="reveal-section" aria-label="Skills">
+    <div class="sec-wrap">
+      <span class="sec-tag">// 02 · ARSENAL</span>
+      <h2 class="sec-title">TECHNOLOGY<br><em>ECOSYSTEM</em></h2>
+
+      <!-- Interactive galaxy canvas -->
+      <div class="skill-galaxy-wrap">
+        <canvas id="skill-canvas" aria-hidden="true"></canvas>
+        <div class="skill-tooltip" id="skill-tooltip" role="tooltip"></div>
+      </div>
+
+      <!-- Skill cards grid (injected by JS) -->
+      <div class="skill-grid" id="skill-grid" aria-label="Skill proficiency cards"></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+     PROJECTS — 3D SHOWCASE
+════════════════════════════════════ -->
+  <section id="projects" class="reveal-section" aria-label="Projects">
+    <div class="sec-wrap">
+      <span class="sec-tag">// 03 · MISSIONS</span>
+      <h2 class="sec-title">DEPLOYED<br><em>OPERATIONS</em></h2>
+
+      <div class="projects-3d">
+
+        <!-- PROJECT 01 -->
+        <div class="proj-item" data-reveal>
+          <div class="proj-shell" data-tilt>
+            <div class="proj-num">01</div>
+
+            <div class="proj-img-zone">
+              <img
+                src="https://png.pngtree.com/thumb_back/fw800/background/20230613/pngtree-ecommerce-website-with-shopping-cart-with-the-shopping-cart-on-a-image_2975658.jpg"
+                alt="Online Sales Web UI" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
+
+              <div class="proj-scanline" aria-hidden="true"></div>
+              <div class="proj-corner tl" aria-hidden="true"></div>
+              <div class="proj-corner tr" aria-hidden="true"></div>
+              <div class="proj-corner bl" aria-hidden="true"></div>
+              <div class="proj-corner br" aria-hidden="true"></div>
+
+              <div class="proj-hud" aria-hidden="true">
+                <span>RENDER_OK</span>
+                <span>60fps</span>
+              </div>
+            </div>
+
+            <div class="proj-info">
+              <div class="proj-tags">
+                <span>React</span><span>UI Design</span><span>CSS3</span>
+              </div>
+
+              <h3 class="proj-title">ONLINE SALES WEB UI</h3>
+
+              <p class="proj-desc">
+                Modern e-commerce web UI with responsive design, product showcase layout, and smooth user experience.
+              </p>
+
+              <div class="proj-links">
+                <a href="https://online-sales-web-ui.vercel.app/" target="_blank" rel="noopener noreferrer"
+                  class="pl-live">
+                  <span class="pl-dot"></span>LIVE DEMO
+                </a>
+
+                <a href="https://github.com/maheshmochi/Online_sales_WebUi" target="_blank" rel="noopener noreferrer"
+                  class="pl-gh">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="13" aria-hidden="true">
+                    <path
+                      d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                  </svg>
+                  SOURCE
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+        <!-- PROJECT 03 -->
+        <div class="proj-item" data-reveal>
+          <div class="proj-shell" data-tilt>
+            <div class="proj-num">03</div>
+
+            <div class="proj-img-zone">
+              <img src="https://moneymint.com/wp-content/uploads/2023/01/Screenshot-9.png"
+                alt="Zombyte Food Delivery App" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
+
+              <div class="proj-scanline" aria-hidden="true"></div>
+              <div class="proj-corner tl"></div>
+              <div class="proj-corner tr"></div>
+              <div class="proj-corner bl"></div>
+              <div class="proj-corner br"></div>
+
+              <div class="proj-hud" aria-hidden="true">
+                <span>ORDER_OK</span>
+                <span>Flask</span>
+              </div>
+            </div>
+
+            <div class="proj-info">
+              <div class="proj-tags">
+                <span>React</span><span>Node.js</span><span>MongoDB</span>
+              </div>
+
+              <h3 class="proj-title">ZOMBYTE FOOD DELIVERY ORDER</h3>
+
+              <p class="proj-desc">
+                Full-stack food delivery web app with restaurant listings, ordering system, and user-friendly interface.
+              </p>
+
+              <div class="proj-links">
+                <a href="https://frontend-bca3.onrender.com/" target="_blank" rel="noopener noreferrer" class="pl-live">
+                  <span class="pl-dot"></span>LIVE DEMO
+                </a>
+
+                <a href="https://github.com/maheshmochi/Zombyte_Food_Delivery_Order" target="_blank"
+                  rel="noopener noreferrer" class="pl-gh">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="13" aria-hidden="true">
+                    <path
+                      d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                  </svg>
+                  SOURCE
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 04 -->
+        <div class="proj-item" data-reveal>
+          <div class="proj-shell" data-tilt>
+            <div class="proj-num">04</div>
+            <div class="proj-img-zone">
+              <img src="PortFolio-11-25-2025.png" alt="Personal Portfolio Website" loading="lazy"
+                onerror="this.parentElement.classList.add('no-img')">
+              <div class="proj-scanline" aria-hidden="true"></div>
+              <div class="proj-corner tl"></div>
+              <div class="proj-corner tr"></div>
+              <div class="proj-corner bl"></div>
+              <div class="proj-corner br"></div>
+              <div class="proj-hud" aria-hidden="true"><span>HTML_RENDER</span><span>v1.0</span></div>
+            </div>
+            <div class="proj-info">
+              <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+              <h3 class="proj-title">PORTFOLIO SYSTEM</h3>
+              <p class="proj-desc">Matrix-effect developer portfolio with smooth cinematic transitions and animated
+                interactions.</p>
+              <div class="proj-links">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="pl-live">
+                  <span class="pl-dot"></span>LIVE DEMO
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="pl-gh">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="13" aria-hidden="true">
+                    <path
+                      d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                  </svg>
+                  SOURCE
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+     STATS / METRICS DASHBOARD
+════════════════════════════════════ -->
+  <section id="stats" class="reveal-section" aria-label="Stats and metrics">
+    <div class="sec-wrap">
+      <span class="sec-tag">// 04 · METRICS</span>
+      <h2 class="sec-title">PERFORMANCE<br><em>DASHBOARD</em></h2>
+
+      <div class="metrics-grid">
+        <div class="metric-card glass" data-reveal data-count="10" data-suffix="+">
+          <span class="mc-icon">⚡</span>
+          <span class="mc-val">10</span>
+          <div class="mc-label">LeetCode Problems</div>
+          <div class="mc-sub">DSA · Algorithms · Logic</div>
+        </div>
+        <div class="metric-card glass" data-reveal data-count="4">
+          <span class="mc-icon">🚀</span>
+          <span class="mc-val">4</span>
+          <div class="mc-label">Live Projects</div>
+          <div class="mc-sub">Deployed · Active · Monitored</div>
+        </div>
+        <div class="metric-card glass" data-reveal data-count="14" data-suffix="+">
+          <span class="mc-icon">🛠</span>
+          <span class="mc-val">14</span>
+          <div class="mc-label">Technologies</div>
+          <div class="mc-sub">Frontend · Backend · DevOps</div>
+        </div>
+        <div class="metric-card glass" data-reveal data-count="3">
+          <span class="mc-icon">📈</span>
+          <span class="mc-val">3</span>
+          <div class="mc-label">Years Active</div>
+          <div class="mc-sub">Growing · Learning · Shipping</div>
+        </div>
+      </div>
+
+      <!-- External profiles -->
+      <div class="profiles-panel" data-reveal>
+        <div class="pp-title">// EXTERNAL PROFILES</div>
+        <div class="pp-grid">
+
+          <a href="https://leetcode.com/u/Maheshmochi/" target="_blank" rel="noopener noreferrer" class="pp-card glass">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" alt="LeetCode"
+              width="24" height="24" style="filter:invert(1);flex-shrink:0">
+            <div><strong>LeetCode</strong><span>Maheshmochi</span></div>
+            <span class="pp-arr" aria-hidden="true">↗</span>
+          </a>
+
+          <a href="https://www.linkedin.com/in/mahesh-mochi-05357b357/?isSelfProfile=false" target="_blank"
+            rel="noopener noreferrer" class="pp-card glass">
+            <svg viewBox="0 0 24 24" fill="#0A66C2" width="24" aria-hidden="true" style="flex-shrink:0">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+            <div><strong>LinkedIn</strong><span> Mahesh Mochi</span></div>
+            <span class="pp-arr" aria-hidden="true">↗</span>
+          </a>
+
+          <a href="https://github.com/maheshmochi" target="_blank" rel="noopener noreferrer" class="pp-card glass">
+            <svg viewBox="0 0 24 24" fill="white" width="24" aria-hidden="true" style="flex-shrink:0">
+              <path
+                d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+            </svg>
+            <div><strong>GitHub</strong><span>maheshmochi</span></div>
+            <span class="pp-arr" aria-hidden="true">↗</span>
+          </a>
+
+          <a href="https://www.instagram.com/maheshmochi18/" target="_blank" rel="noopener noreferrer"
+            class="pp-card glass">
+            <svg viewBox="0 0 24 24" width="24" aria-hidden="true" style="flex-shrink:0">
+              <defs>
+                <linearGradient id="ig-stats" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#f09433" />
+                  <stop offset="50%" stop-color="#e6683c" />
+                  <stop offset="100%" stop-color="#dc2743" />
+                </linearGradient>
+              </defs>
+              <path fill="url(#ig-stats)"
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+            </svg>
+            <div><strong>Instagram</strong><span>maheshmochi18</span></div>
+            <span class="pp-arr" aria-hidden="true">↗</span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+     RESUME / CV
+-->
+
+  <section id="resume">
+    <div class="resume-box">
+      <img src="https://i.pinimg.com/736x/63/44/55/634455157d2e665d824a49064524b49a.jpg" alt="My Resume">
+
+      <a href="resume.pdf" target="_blank" class="resume-btn">
+        View Resume
+      </a>
+
+      <a href="resume.pdf" download="Mahesh_Mochi_Resume.pdf" class="resume-btn">
+        Download CV
+      </a>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+     CONTACT
+════════════════════════════════════ -->
+  <section id="contact" class="reveal-section" aria-label="Contact">
+    <div class="sec-wrap">
+      <span class="sec-tag">// 05 · CONNECT</span>
+      <h2 class="sec-title">ESTABLISH<br><em>CONNECTION</em></h2>
+
+      <div class="contact-layout">
+
+        <!-- Left: meta info + terminal -->
+        <div class="contact-meta" data-reveal>
+
+          <div class="cm-card glass">
+            <div class="cm-status">
+              <span class="status-pulse"></span>
+              <span>AVAILABLE FOR NEW MISSIONS</span>
+            </div>
+            <p>Have an interesting project, startup idea, or opportunity?
+              My channel is always open. Let's build something remarkable.</p>
+            <div class="cm-info-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" width="16" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12,6 12,12 16,14" />
+              </svg>
+              <span>Response time: &lt; 24 hours</span>
+            </div>
+          </div>
+
+          <!-- Terminal widget -->
+          <div class="terminal-window glass" data-reveal>
+            <div class="tw-header">
+              <div class="tw-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span class="tw-title">
+                mahesh@portfolio:~$ cat about_me.txt
+              </span>
+            </div>
+
+            <div class="tw-body">
+
+              <div class="tw-line">
+                <span class="tw-prompt">frontend@mahesh.dev:~$</span>
+                <span class="tw-cmd"></span>
+              </div>
+
+              <div class="tw-line tw-out">
+                Front-End Developer | UI/UX Enthusiast
+              </div>
+
+              <div class="tw-line">
+                <span class="tw-prompt">frontend@mahesh.dev:~$</span>
+                <span class="tw-cmd">status --check</span>
+              </div>
+
+              <div class="tw-line tw-out tw-green">
+                Open for Freelance & Full-Time Opportunities ✓
+              </div>
+
+              <div class="tw-line">
+                <span class="tw-prompt">frontend@mahesh.dev:~$</span>
+                <span class="tw-cmd">skills --core</span>
+              </div>
+
+              <div class="tw-line tw-out">
+                HTML • CSS • JavaScript • React • Tailwind • GSAP
+              </div>
+
+              <div class="tw-line">
+                <span class="tw-prompt">frontend@mahesh.dev:~$</span>
+                <span class="tw-cmd">experience</span>
+              </div>
+
+              <div class="tw-line tw-out">
+                2+ Years Building Responsive & Animated Web Interfaces
+              </div>
+
+              <div class="tw-line">
+                <span class="tw-prompt">frontend@mahesh.dev:~$</span>
+                <span class="tw-cursor-blink" aria-hidden="true">█</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: contact form -->
+        <form class="contact-form glass" id="contactForm" data-reveal novalidate>
+          <span class="cf-header">SEND_MESSAGE.EXE</span>
+
+          <div class="cf-row">
+            <div class="cf-group">
+              <label for="from_name">NAME</label>
+              <input type="text" id="from_name" name="from_name" placeholder="Your name" required autocomplete="name">
+            </div>
+            <div class="cf-group">
+              <label for="from_email">EMAIL</label>
+              <input type="email" id="from_email" name="from_email" placeholder="your@email.com" required
+                autocomplete="email">
+            </div>
+          </div>
+
+          <div class="cf-group">
+            <label for="message">MESSAGE</label>
+            <textarea id="message" name="message" rows="5" placeholder="Describe your mission..." required></textarea>
+          </div>
+
+          <button type="submit" class="cf-submit mag-btn" id="cf-btn">
+            <span id="cf-btn-text">TRANSMIT MESSAGE</span>
+            <div class="cf-loader" id="cf-loader" aria-hidden="true"></div>
+            <div class="cf-glare" aria-hidden="true"></div>
+          </button>
+
+          <div class="cf-msg" id="cf-msg" role="status" aria-live="polite"></div>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!--  
+  <footer id="footer" role="contentinfo">
+    <canvas id="foot-canvas" aria-hidden="true"></canvas>
+    <div class="foot-inner">
+      <div class="foot-logo">
+        <div Mah="Mahesh Mochi"></div>
+      </div>
+      <p class="foot-copy"> Frontend Developer <strong>Mahesh Mochi </strong> · 2026 · All systems operational</p>
+      <p class="foot-legal">© 2026 MAHESH Mochi. All rights reserved.</p>
+    </div>
+  </footer> -->
+  <footer id="footer" role="contentinfo">
+
+    <canvas id="foot-canvas" aria-hidden="true"></canvas>
+
+    <div class="foot-inner">
+
+      <!-- Logo / Name -->
+      <div class="foot-logo">
+        <span class="logo-bracket">[</span>
+        Mahesh Mochi
+        <span class="logo-bracket">]</span>
+      </div>
+
+      <!-- Role -->
+      <p class="foot-copy">
+        Frontend Developer · UI Engineer · JavaScript Enthusiast
+      </p>
+
+      <!-- Status line -->
+      <p class="foot-status">
+        <span class="status-dot"></span>
+        2026 · All systems operational · Available for freelance
+      </p>
+
+      <!-- Social links (optional) -->
+      <div class="foot-links">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <!-- Copyright -->
+      <p class="foot-legal">
+        © 2026 Mahesh Mochi. All rights reserved.
+      </p>
+
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════
+     AI ASSISTANT — RAM.AI
+════════════════════════════════════ -->
+  <div id="ai-panel" class="ai-panel glass" role="dialog" aria-label="RAM.AI Assistant" aria-hidden="true">
+    <div class="ai-header">
+      <div class="ai-avatar" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="32">
+          <circle cx="20" cy="20" r="18" fill="none" stroke="var(--cyan)" stroke-width="1.5" />
+          <circle cx="20" cy="20" r="6" fill="var(--cyan)" opacity="0.3" />
+          <circle cx="20" cy="20" r="2" fill="var(--cyan)" />
+        </svg>
+      </div>
+      <div>
+        <div class="ai-name">MAHESH'S.AI</div>
+        <div class="ai-sub">Portfolio Intelligence</div>
+      </div>
+      <button class="ai-close" id="ai-close" aria-label="Close AI panel">✕</button>
+    </div>
+
+    <div class="ai-messages" id="ai-messages" role="log" aria-live="polite">
+      <div class="ai-msg ai-msg-bot">
+        <span>Hello! 👋 I'm MAHESH'S.AI. Ask me about his skills, projects, experience, or how to work with him.</span>
+      </div>
+    </div>
+
+    <div class="ai-input-row">
+      <input type="text" id="ai-input" placeholder="Ask about skills, projects..." autocomplete="off"
+        aria-label="Ask MAHESH'S.AI a question">
+      <button id="ai-send" class="ai-send-btn" aria-label="Send message">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" aria-hidden="true">
+          <line x1="22" y1="2" x2="11" y2="13" />
+          <polygon points="22 2 15 22 11 13 2 9 22 2" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <button id="ai-toggle" class="ai-toggle-btn" aria-label="Open MAHESH'S.AI assistant">
+    <svg viewBox="0 0 40 40" width="24" aria-hidden="true">
+      <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <circle cx="20" cy="20" r="6" fill="currentColor" opacity="0.4" />
+      <circle cx="20" cy="20" r="2" fill="currentColor" />
+    </svg>
+    <div class="ai-toggle-pulse" aria-hidden="true"></div>
+  </button>
+
+  <!-- ════ SCRIPTS ════ -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
