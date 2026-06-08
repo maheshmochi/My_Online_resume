@@ -1036,73 +1036,203 @@ function initAI() {
   bind(send, 'click', handleQuery);
   bind(input, 'keydown', e => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleQuery()));
 
-  // Consolidated Knowledge Base
-  const responses = {
-    about: '👨‍💻 MAHESH (Sai Ram K) is a Full-Stack Developer passionate about building scalable web applications, tackling complex engineering challenges, and creating interactive digital experiences.',
-    skills: '🔥 MAHESH is proficient in DSA , HTML5, CSS3, JavaScript, React.js, Python, Java, Spring Boot , MAVEN ,SQL, and the MERN Stack. He’s currently scaling into Next.js and AI dev.',
-    projects: '🛠️ MAHESH\'s builds:\n🎬 *Movies Trending App*\n📄 *Smart Resume Builder* (AI-powered)\n📚 *Digital Library Manager*\n💻 *Personal Portfolio*',
-    contact: '📬 Reach MAHESH here:\n🔗 LinkedIn: sai-ram-k-847b61375\n💻 GitHub:0007RAM\n📧 Or use the contact form on this page!\n\n*(Note: Personal numbers, WhatsApp, and Discord IDs are private to prevent spam, but he is highly responsive via LinkedIn and Email!)*',
-    leetcode: '📈 MAHESH has crushed 420+ LeetCode problems spanning Arrays, Graphs, and DP. Handle: 007RAM.',
-    education: '🎓 MAHESH  is currently a 3rd-year B.Tech Computer Science student maintaining clean academic standing with zero active backlogs. He chose engineering out of a core passion for breaking down complex systems and building solutions from scratch.',
-    hiring: '💼 Yes! MAHESH is actively available for internships, full-time software engineering roles, and freelance collaborations. Drop a message via the contact form or LinkedIn to schedule an interview or introductory call!'
-  };
+const responses = {
+  about: '👨‍💻 Mahesh Mochi is a B.Sc. IT student and aspiring Frontend Developer passionate about creating modern web applications and continuously improving his development skills through real-world projects and problem-solving.',
 
-  // High-Density Token Association Map
-  const keywordMap = {
-    ram: 'about', about: 'about', bio: 'about', profile: 'about', engineer: 'about', developer: 'about', explain: 'about', who: 'about', hobby: 'about', hobbies: 'about', why: 'about', choose: 'about', reason: 'about',
-    skill: 'skills', skills: 'skills', stack: 'skills', tech: 'skills', technology: 'skills', technologies: 'skills', language: 'skills', languages: 'skills', tool: 'skills', tools: 'skills', know: 'skills', use: 'skills', expertise: 'skills', proficient: 'skills', java: 'skills', python: 'skills', react: 'skills', mern: 'skills', backend: 'skills', frontend: 'skills',
-    project: 'projects', projects: 'projects', app: 'projects', apps: 'projects', build: 'projects', builds: 'projects', built: 'projects', create: 'projects', created: 'projects', work: 'projects', works: 'projects', portfolio: 'projects', github: 'projects', link: 'projects', links: 'projects',
-    contact: 'contact', email: 'contact', reach: 'contact', linkedin: 'contact', connect: 'contact', social: 'contact', message: 'contact', mail: 'contact', phone: 'contact', number: 'contact', mobile: 'contact', whatsapp: 'contact', discord: 'contact', text: 'contact',
-    leetcode: 'leetcode', dsa: 'leetcode', algorithm: 'leetcode', algorithms: 'leetcode', coding: 'leetcode', problem: 'leetcode', problems: 'leetcode', solve: 'leetcode', solved: 'leetcode', crush: 'leetcode', crushed: 'leetcode',
-    college: 'education', university: 'education', institution: 'education', study: 'education', studying: 'education', year: 'education', semester: 'education', grade: 'education', grades: 'education', gpa: 'education', cgpa: 'education', backlog: 'education', backlogs: 'education', fail: 'education', degree: 'education',
-    hire: 'hiring', hiring: 'hiring', job: 'hiring', opportunity: 'hiring', internship: 'hiring', internships: 'hiring', freelance: 'hiring', call: 'hiring', schedule: 'hiring', interview: 'hiring', available: 'hiring', availability: 'hiring', meet: 'hiring'
-  };
+  skills: '🔥 Mahesh is skilled in HTML5, CSS3, JavaScript, React.js, Web Development, Database Management, Git/GitHub, and Responsive Design. He is actively learning advanced frontend technologies and modern development practices.',
 
-  function getReply(q) {
-    q = q.toLowerCase().trim();
+  projects: '🛠️ Mahesh\'s projects include:\n🌐 Frontend Web Applications\n📚 Academic IT Projects\n💻 Personal Portfolio Projects\n🚀 React-based Development Projects',
 
-    // 1. TARGETED GUARDRAIL A: Strict Personal Prying
-    const personalRegex = /\b(wife|married|marriage|girlfriend|boyfriend|relationship|age|old|salary|money|income|pay|cash|religion|caste|political|politics|party|live|location|address|home)\b/i;
-    if (personalRegex.test(q)) {
-      return `FAAAAAHHHH! 💀💀💀💀\n\nNice try, but Ram's personal life/demographics are encrypted. Let's stick to his code, projects, and career skills. Stay focused!`;
-    }
+  contact: '📬 Reach Mahesh here:\n🔗 LinkedIn: mahesh-mochi-05357b357\n📍 Bhabhar, Gujarat, India\n📧 Contact through LinkedIn for collaborations and opportunities.',
 
-    // 2. TARGETED GUARDRAIL B: Academic Dishonesty / Malicious Requests
-    const exploitRegex = /\b(hack|hacking|crack|cracking|cheat|cheating|exam|assignment|homework|do my project|write my project)\b/i;
-    if (exploitRegex.test(q)) {
-      return `FAAAAAHHHH! 💀💀💀💀\n\nI am an engineering portfolio assistant, not a dark-web client or a homework bot. Ram builds robust, ethical software. Check out his real GitHub projects instead!`;
-    }
+  leetcode: '📈 Mahesh continuously practices problem-solving and programming concepts to strengthen his technical skills and development knowledge.',
 
-    // 3. High-Priority Intent Routing (Greetings)
-    if (/^(hi|hello|hey|hii|hola|who are you|yo|greetings)/i.test(q)) {
-      return `👋 Yo! I'm RAM.AI. Ask me about Ram's professional projects, engineering skills, or LeetCode stats!`;
-    }
+  education: '🎓 Mahesh Mochi is pursuing a B.Sc. in Information Technology and is focused on building a strong foundation in software development, web technologies, and database systems.',
 
-    // 4. Token-Based Scoring Engine
-    const tokens = q.match(/\b\w+\b/g) || [];
-    const scores = {};
+  hiring: '💼 Mahesh is open to internships, frontend development opportunities, freelance projects, and collaborative tech initiatives.'
+};
 
-    tokens.forEach(token => {
-      const category = keywordMap[token];
-      if (category) {
-        scores[category] = (scores[category] || 0) + 1;
-      }
-    });
+// LinkedIn-Based Keyword Association Map
+const keywordMap = {
+  // About
+  mahesh: 'about',
+  mochi: 'about',
+  about: 'about',
+  bio: 'about',
+  profile: 'about',
+  who: 'about',
+  developer: 'about',
+  frontend: 'about',
+  student: 'about',
+  introduction: 'about',
+  info: 'about',
 
-    const matches = Object.keys(scores)
-      .map(cat => ({ cat, score: scores[cat] }))
-      .sort((a, b) => b.score - a.score);
+  // Skills
+  skill: 'skills',
+  skills: 'skills',
+  tech: 'skills',
+  technology: 'skills',
+  technologies: 'skills',
+  html: 'skills',
+  html5: 'skills',
+  css: 'skills',
+  css3: 'skills',
+  javascript: 'skills',
+  js: 'skills',
+  react: 'skills',
+  reactjs: 'skills',
+  web: 'skills',
+  frontend: 'skills',
+  database: 'skills',
+  git: 'skills',
+  github: 'skills',
+  coding: 'skills',
+  programming: 'skills',
 
-    if (matches.length > 0) {
-      if (matches.length > 1 && matches[0].score >= 1 && matches[1].score >= 1) {
-        return `I got you. Here's the info:\n\n${responses[matches[0].cat]}\n\n${responses[matches[1].cat]}`;
-      }
-      return responses[matches[0].cat];
-    }
+  // Projects
+  project: 'projects',
+  projects: 'projects',
+  app: 'projects',
+  apps: 'projects',
+  website: 'projects',
+  websites: 'projects',
+  portfolio: 'projects',
+  build: 'projects',
+  built: 'projects',
+  create: 'projects',
+  created: 'projects',
+  work: 'projects',
+  works: 'projects',
+  development: 'projects',
 
-    // 5. Absolute Fallback
-    return `FAAAAAHHHH! 💀💀💀💀\n\nI have no idea what you just said. My knowledge base only covers Ram's professional portfolio. Ask about his projects or skills!`;
+  // Contact
+  contact: 'contact',
+  linkedin: 'contact',
+  connect: 'contact',
+  reach: 'contact',
+  message: 'contact',
+  mail: 'contact',
+  email: 'contact',
+  social: 'contact',
+  location: 'contact',
+  gujarat: 'contact',
+  bhabhar: 'contact',
+
+  // Problem Solving
+  leetcode: 'leetcode',
+  dsa: 'leetcode',
+  problem: 'leetcode',
+  problems: 'leetcode',
+  coding: 'leetcode',
+  algorithm: 'leetcode',
+  algorithms: 'leetcode',
+  practice: 'leetcode',
+  solve: 'leetcode',
+  solved: 'leetcode',
+
+  // Education
+  education: 'education',
+  college: 'education',
+  university: 'education',
+  degree: 'education',
+  bsc: 'education',
+  it: 'education',
+  student: 'education',
+  study: 'education',
+  studying: 'education',
+  academic: 'education',
+
+  // Opportunities
+  hire: 'hiring',
+  hiring: 'hiring',
+  internship: 'hiring',
+  internships: 'hiring',
+  opportunity: 'hiring',
+  opportunities: 'hiring',
+  job: 'hiring',
+  jobs: 'hiring',
+  freelance: 'hiring',
+  available: 'hiring',
+  collaboration: 'hiring',
+  collaborate: 'hiring'
+};
+
+function getReply(q) {
+  q = q.toLowerCase().trim();
+
+  // 1. TARGETED GUARDRAIL A: Strict Personal Prying
+  const personalRegex = /\b(wife|married|marriage|girlfriend|boyfriend|relationship|age|old|salary|money|income|pay|cash|religion|caste|political|politics|party|address|home)\b/i;
+
+  if (personalRegex.test(q)) {
+    return `FAAAAAHHHH! 💀💀💀💀
+
+Nice try, but Mahesh's personal information is private. Let's stick to his projects, skills, education, and professional journey. 🚀`;
   }
+
+  // 2. TARGETED GUARDRAIL B: Academic Dishonesty / Malicious Requests
+  const exploitRegex = /\b(hack|hacking|crack|cracking|cheat|cheating|exam|assignment|homework|do my project|write my project)\b/i;
+
+  if (exploitRegex.test(q)) {
+    return `FAAAAAHHHH! 💀💀💀💀
+
+I am Mahesh's portfolio assistant, not a hacking or cheating bot. Ask me about his web development skills, projects, or learning journey instead! 🚀`;
+  }
+
+  // 3. High-Priority Intent Routing (Greetings)
+  if (/^(hi|hello|hey|hii|hola|who are you|yo|greetings)$/i.test(q)) {
+    return `👋 Yo! I'm MAHESH.AI. Ask me about Mahesh's projects, technical skills, education, or career opportunities!`;
+  }
+
+  // 4. Token-Based Scoring Engine
+  const tokens = q.match(/\b\w+\b/g) || [];
+  const scores = {};
+
+  tokens.forEach(token => {
+    const category = keywordMap[token];
+
+    if (category) {
+      scores[category] = (scores[category] || 0) + 1;
+    }
+  });
+
+  const matches = Object.keys(scores)
+    .map(cat => ({
+      cat,
+      score: scores[cat]
+    }))
+    .sort((a, b) => b.score - a.score);
+
+  if (matches.length > 0) {
+    if (
+      matches.length > 1 &&
+      matches[0].score >= 1 &&
+      matches[1].score >= 1
+    ) {
+      return `I got you. Here's the info:
+
+${responses[matches[0].cat]}
+
+${responses[matches[1].cat]}`;
+    }
+
+    return responses[matches[0].cat];
+  }
+
+  // 5. Absolute Fallback
+  return `FAAAAAHHHH! 💀💀💀💀
+
+I have no idea what you just said.
+
+My knowledge base only covers Mahesh's professional portfolio.
+
+Try asking about:
+• Skills
+• Projects
+• Education
+• Contact
+• Coding Practice
+• Career Opportunities 🚀`;
+}
 
   function appendMsg(text, type) {
     const d = document.createElement('div');
