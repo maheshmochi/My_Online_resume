@@ -759,22 +759,92 @@
 
   </main>
 
-  <!-- Footer -->
-  <footer id="footer">
-    <canvas id="foot-canvas" aria-hidden="true"></canvas>
-    <div class="foot-inner">
-      <div class="foot-logo"><span class="logo-bracket">[</span> Mahesh Mochi <span class="logo-bracket">]</span></div>
-      <p class="foot-copy">Frontend developer · UI engineer · JavaScript enthusiast</p>
-      <p class="foot-status"><span class="status-dot"></span>Available for freelance work</p>
-      <div class="foot-links">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+  <footer class="mm-footer" id="footer">
+    <div class="mm-footer-container">
+
+      <div class="mm-footer-main">
+        <!-- Brand -->
+        <div class="mm-footer-brand">
+          <a href="#home" class="mm-footer-logo">
+            <span class="mm-logo-icon">M</span>
+            <span>Mahesh<span class="mm-logo-dot">.</span></span>
+          </a>
+
+          <p class="mm-footer-description">
+            Frontend developer passionate about creating
+            clean interfaces and meaningful digital experiences.
+          </p>
+
+          <div class="mm-footer-status">
+            <span class="mm-status-dot"></span>
+            Open to frontend internships
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="mm-footer-column">
+          <h3>Explore</h3>
+          <a href="#home">Home</a>
+          <a href="#about">About Me</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <!-- Social Links -->
+        <div class="mm-footer-column">
+          <h3>Connect</h3>
+          <a href="https://github.com/maheshmochi" target="_blank" rel="noopener noreferrer">
+            GitHub <span>↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/mahesh-mochi-05357b357/" target="_blank" rel="noopener noreferrer">
+            LinkedIn <span>↗</span>
+          </a>
+          <a href="https://www.instagram.com/maheshmochi18/" target="_blank" rel="noopener noreferrer">
+            Instagram <span>↗</span>
+          </a>
+          <a href="https://maheshmochibiodata.vercel.app" target="_blank" rel="noopener noreferrer">
+            Portfolio <span>↗</span>
+          </a>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="mm-footer-column mm-footer-contact">
+          <h3>Have a project?</h3>
+          <p>Let's connect and turn your ideas into reality.</p>
+          <a href="#contact" class="mm-footer-button">
+            Get in touch <span>↗</span>
+          </a>
+        </div>
       </div>
-      <p class="foot-legal">© 2026 Mahesh Mochi. All rights reserved.</p>
+
+      <!-- Bottom -->
+      <div class="mm-footer-bottom">
+        <a href="#home" class="mm-footer-bottom-logo">
+          <span>MM</span> · Mahesh Mochi
+        </a>
+
+        <p>
+          © <span id="mm-footer-year">2026</span> Mahesh Mochi.
+          All rights reserved.
+        </p>
+
+        <a href="#home" class="mm-back-top">
+          Back to top <span>↑</span>
+        </a>
+      </div>
+
     </div>
   </footer>
+
+  <script>
+    const mmFooterYear = document.getElementById("mm-footer-year");
+
+    if (mmFooterYear) {
+      mmFooterYear.textContent = new Date().getFullYear();
+    }
+  </script>
+
 
   <!-- AI assistant -->
   <div id="ai-panel" class="ai-panel glass" role="dialog" aria-label="Mahesh's AI assistant" aria-hidden="true">
